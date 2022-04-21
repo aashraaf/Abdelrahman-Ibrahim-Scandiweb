@@ -110,8 +110,8 @@
 }
 
 .brandIcon {
-  position: relative;
-  /* left: 400px ; */
+  position: fixed;
+  left: 50%;
   padding-top: 10px;
 }
 
@@ -134,7 +134,7 @@
   padding: 5px;
   z-index: 3;
   transition: 0.3s;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 .currencyBtn:hover {
   transition: 0.3s;
@@ -146,6 +146,7 @@
   position: relative;
   left: 5px;
   bottom: 2px;
+  padding-right: 3px;
 }
 
 .currencyMenu {
@@ -173,12 +174,17 @@
   font-size: 18px;
   padding-top: 15px;
   padding-bottom: 15px;
+  text-align: left;
   margin: 0px;
   margin-left: 25px;
   border-radius: 30%;
   transition: 0.3s;
 }
-.currencyItems:hover {
+.currencyItemsHolder {
+  width: 100%;
+  transition: 0.3s;
+}
+.currencyItemsHolder:hover {
   transition: 0.3s;
   cursor: pointer;
   background-color: #e2e2e2;
@@ -188,15 +194,15 @@
 .cartMenu {
   z-index: 3;
   position: relative;
-  padding-left: 10px;
-  padding-top: 21px;
-  padding-left: 30px;
+  padding-top: 16px;
+  padding-left: 16px;
 }
 
 .cartIcon {
   transition: 0.3s;
-  border-radius: 20%;
-  border-spacing: 2px;
+  padding: 5px;
+  /* border-radius: 20%; */
+  /* border-spacing: 2px; */
 }
 
 .cartIcon:hover {
@@ -212,14 +218,15 @@
   width: 20px;
   background-color: #1d1f22;
   border-radius: 60%;
-  bottom: 34px;
-  left: 12px;
+  bottom: 38px;
+  left: 18px;
   color: #ffffff;
   text-transform: uppercase;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
+  line-height: 20px;
   align-items: center;
   text-align: center;
 }
@@ -381,7 +388,7 @@
   font-size: 16px;
 }
 
-.opacity{
+.opacity {
   background-color: #393748;
   position: fixed;
   width: 100%;
@@ -390,5 +397,4 @@
   left: 0px;
   z-index: 2;
   opacity: 22%;
-
 }

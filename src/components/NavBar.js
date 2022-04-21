@@ -193,16 +193,18 @@ class NavBar extends Component {
                 <div className="currencyMenu">
                   {this.state.currencies.map((c, i) => {
                     return (
-                      <h2
+                      <div
                         key={i}
-                        className="currencyItems"
+                        className="currencyItemsHolder"
                         onClick={() => {
                           this.props.changeCurrency(c.symbol);
                           this.setState({ showCurrency: false });
                         }}
                       >
-                        {c.symbol} {c.label}
-                      </h2>
+                        <h2 className="currencyItems">
+                          {c.symbol} {c.label}
+                        </h2>
+                      </div>
                     );
                   })}
                 </div>
@@ -271,40 +273,42 @@ class NavBar extends Component {
                   {this.props.currency + "" + this.props.totalPrice}
                 </h2>
               </div>
-              {this.state.categories===null?<></>:
-              <div className="buttonFlex">
-                <Link
-                  style={{ textDecoration: "none" }}
-                  to={{ pathname: "/cart" }}
-                >
-                  <h2
-                    className="viewBag"
-                    onClick={() => this.setState({ showCart: false })}
+              {this.state.categories === null ? (
+                <></>
+              ) : (
+                <div className="buttonFlex">
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={{ pathname: "/cart" }}
                   >
-                    {" "}
-                    View Bag
-                  </h2>
-                </Link>
-                <Link
-                  onClick={() => {
-                    this.props.changeCategory(this.state.categories[0].name);
-                  }}
-                  style={{ textDecoration: "none" }}
-                  to={{ pathname: "/"+this.state.categories[0].name }}
-                >
-                  <h2
-                    className="checkOut"
+                    <h2
+                      className="viewBag"
+                      onClick={() => this.setState({ showCart: false })}
+                    >
+                      {" "}
+                      View Bag
+                    </h2>
+                  </Link>
+                  <Link
                     onClick={() => {
-                      this.setState({ showCart: false });
-                      this.props.deleteCart();
+                      this.props.changeCategory(this.state.categories[0].name);
                     }}
+                    style={{ textDecoration: "none" }}
+                    to={{ pathname: "/" + this.state.categories[0].name }}
                   >
-                    {" "}
-                    Check Out
-                  </h2>
-                </Link>
-              </div>
-              }
+                    <h2
+                      className="checkOut"
+                      onClick={() => {
+                        this.setState({ showCart: false });
+                        this.props.deleteCart();
+                      }}
+                    >
+                      {" "}
+                      Check Out
+                    </h2>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -296,7 +296,12 @@ class App extends Component {
               <Route path="/product/:id" element={<ProductPageWrapper />} />
               <Route path="/:category" element={<MainPageWrapper />} />
               <Route path="/cart" element={<CartPageWrapper />} />
-              <Route path="*" element={<Navigate to="/all" replace />} />
+              <Route
+                path="*"
+                element={
+                  <Navigate to={"/" + this.state.categories[0].name} replace />
+                }
+              />
             </Routes>
           </BrowserRouter>
         </div>
