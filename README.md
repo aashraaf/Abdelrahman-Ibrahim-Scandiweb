@@ -1,12 +1,17 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## GraphQL endpoint
+
+In order for the app to work properly, the GraphQL endpoint should be started first on [http://localhost:4000](http://localhost:4000).
+
+You can find the endpoint here: [GraphQL endpoint](https://github.com/scandiweb/junior-react-endpoint)
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you should run:
 
 ### `npm i`
+
 To install all the required dependencies and packages needed to run the app.
 
 ### `npm start`
