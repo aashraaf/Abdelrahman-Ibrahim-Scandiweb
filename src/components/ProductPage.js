@@ -1,5 +1,5 @@
 import "../css/ProductPage.css";
-import React, { Component, memo } from "react";
+import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import parse from "html-react-parser";
 import { Link } from "react-router-dom";
@@ -214,4 +214,4 @@ class ProductPage extends Component {
   }
 }
 
-export default memo(ProductPage);
+export default ProductPage;
