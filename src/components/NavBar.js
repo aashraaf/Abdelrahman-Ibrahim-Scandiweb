@@ -160,10 +160,7 @@ class NavBar extends Component {
         <div className="brandIcon">
           <img alt="" src={require("../files/Brand icon.png")} />
         </div>
-        <div
-          className="navFlex"
-          style={{ marginRight: "10%" }}
-        >
+        <div className="navFlex" style={{ marginRight: "10%" }}>
           {this.state.currencies === null ? (
             <div></div>
           ) : (
@@ -235,7 +232,7 @@ class NavBar extends Component {
                   {" " + this.props.totalAmount + " items"}
                 </h2>
               </div>
-              <div className="scroll">
+              <div className="scroll" id="miniCartScroll">
                 {this.props.cart === null ? (
                   <div></div>
                 ) : (
