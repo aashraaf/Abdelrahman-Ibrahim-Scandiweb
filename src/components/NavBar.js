@@ -162,7 +162,7 @@ class NavBar extends Component {
         </div>
         <div
           className="navFlex"
-          style={{ marginLeft: "150px", marginRight: "20px" }}
+          style={{ marginRight: "10%" }}
         >
           {this.state.currencies === null ? (
             <div></div>
