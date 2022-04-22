@@ -425,4 +425,5 @@
   left: 0px;
   z-index: 2;
   opacity: 22%;
+  pointer-events: none;
 }
