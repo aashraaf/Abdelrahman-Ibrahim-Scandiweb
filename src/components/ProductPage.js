@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 class ProductPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { product: null, image: null, pAttributes: [], valid: false };
+    this.state = {
+      product: null,
+      image: null,
+      pAttributes: [],
+      valid: false,
+      loading: false,
+    };
     this._isMounted = false;
   }
 
@@ -72,10 +78,12 @@ class ProductPage extends Component {
             this.setState({
               product: result.data.product,
               image: result.data.product.gallery[0],
+              valid: true,
             });
           }
-          this.setState({ valid: true });
+          // this.setState({ valid: true });
         }
+        this.setState({ loading: true });
       });
   }
 
@@ -89,11 +97,15 @@ class ProductPage extends Component {
   }
 
   render() {
-    if (this.state.valid) {
+    if (this.state.loading) {
       return (
         <div className="mainProduct">
-          {this.state.product === null ? (
-            <div></div>
+          {!this.state.valid ? (
+            <h2 className="titleNA">Product Not Available</h2>
+          ) : !this.state.product.inStock ? (
+            <div className="main">
+              <h2 className="titleNA">Sorry, Product Out Of Stock</h2> <br></br>
+            </div>
           ) : (
             <div className="productHolder">
               <div className="smallImgs">
@@ -138,7 +150,15 @@ class ProductPage extends Component {
                                     ? "singleAttSelectedSwatch"
                                     : "singleAttSwatch"
                                 }
-                                style={{ backgroundColor: item.displayValue }}
+                                style={{
+                                  backgroundColor: item.displayValue,
+                                  borderColor:
+                                    this.state.pAttributes[i] === item.value
+                                      ? "#5ECE7B"
+                                      : item.displayValue === "White"
+                                      ? "black"
+                                      : item.displayValue,
+                                }}
                                 onClick={() => this.changeAtt(item.value, i)}
                               ></div>
                             </div>
@@ -181,11 +201,13 @@ class ProductPage extends Component {
                     </h2>
                   ))}
 
-                <Link to="/" style={{ textDecoration: "none" }}>
+                <Link
+                  to={{ pathname: "/" + this.props.category }}
+                  style={{ textDecoration: "none" }}
+                >
                   <div
                     className="addCart"
                     onClick={() => {
-                      this.props.changeCategory("all");
                       this.props.addToCartAttributes(
                         this.state.product,
                         this.state.pAttributes
@@ -207,7 +229,7 @@ class ProductPage extends Component {
     } else {
       return (
         <div className="main">
-          <h2 className="titleNA">Product Not Available</h2> <br></br>
+          <></>
         </div>
       );
     }

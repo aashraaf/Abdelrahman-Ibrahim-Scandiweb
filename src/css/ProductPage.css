@@ -157,6 +157,7 @@
   line-height: 27px;
   align-items: center;
   margin: 0%;
+  padding-top: 15px;
   text-transform: uppercase;
   color: #1d1f22;
 }
@@ -207,6 +208,7 @@
   text-transform: uppercase;
   color: #292929;
   border-style: solid;
+  border-width: 1px;
   box-sizing: 1px;
   transition: 0.3s;
 }
@@ -214,8 +216,8 @@
 .singleAttSwatch {
   position: relative;
   width: fit-content;
-  min-width: 63px;
-  height: 45px;
+  min-width: 32px;
+  height: 32px;
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 400;
@@ -227,8 +229,12 @@
   text-transform: uppercase;
   color: #292929;
   border-style: solid;
+  border-width: 2px;
   box-sizing: 1px;
-  transition: 0.3s;
+  transition: 0.1s;
+  /* padding: 1px; */
+
+  background-clip: content-box;
 }
 
 .singleAttSelected {
@@ -249,6 +255,7 @@
   border-style: solid;
   box-sizing: 1px;
   border-style: solid;
+  border-width: 1px;
   border-color: #1d1f22;
   background-color: #1d1f22;
   transition: 0.3s;
@@ -257,8 +264,8 @@
 .singleAttSelectedSwatch {
   position: relative;
   width: fit-content;
-  min-width: 63px;
-  height: 45px;
+  min-width: 32px;
+  height: 32px;
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 400;
@@ -270,17 +277,19 @@
   text-transform: uppercase;
   color: #ffffff;
   border-style: solid;
-  border-width: 5px;
-  border-color: #1d1f22;
+  border-width: 2px;
+  border-color: #5ece7b;
   transition: 0.3s;
+  padding: 1px;
+  background-clip: content-box;
 }
 
 .singleAttSwatch:hover {
   border-color: #5ece7b;
   border-style: solid;
-  border-width: 3px;
-  transition: 0.3s;
-  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.25);
+  border-width: 2px;
+  transition: 0.1s;
+  /* box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.25); */
   cursor: pointer;
 }
 

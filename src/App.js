@@ -169,7 +169,7 @@ class App extends Component {
   }
 
   deleteCart() {
-    this.setState({ cart: [], totalPrice: 0 });
+    this.setState({ cart: [], totalPrice: 0, totalAmount: 0 });
     localStorage.setItem("cart", JSON.stringify([]));
     localStorage.setItem("totalPrice", 0.0);
     localStorage.setItem("totalAmount", 0);
@@ -251,6 +251,7 @@ class App extends Component {
       const params = useParams();
       return (
         <ProductPage
+          category={this.state.category}
           client={this.client}
           id={this.state.singleProductid}
           addToCartAttributes={this.addToCartAttributes}
@@ -265,6 +266,12 @@ class App extends Component {
       const params = useParams();
       return (
         <CartPage
+          category={this.state.category}
+          totalAmount={this.state.totalAmount}
+          totalPrice={this.state.totalPrice}
+          categories={this.state.categories}
+          changeCategory={this.changeCategory}
+          deleteCart={this.deleteCart}
           client={this.client}
           addToCartAttributes={this.addToCartAttributes}
           removeFromCart={this.removeFromCart}

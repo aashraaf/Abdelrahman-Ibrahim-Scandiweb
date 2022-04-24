@@ -145,7 +145,9 @@ class NavBar extends Component {
                 <NavLink
                   onClick={() => this.props.changeCategory(cat.name)}
                   className={({ isActive }) =>
-                    isActive ? "categoryOn" : "categoryOff"
+                    cat.name === this.props.category
+                      ? "categoryOn"
+                      : "categoryOff"
                   }
                   style={{ textDecoration: "none" }}
                   key={cat.name}
@@ -235,7 +237,7 @@ class NavBar extends Component {
               <div className="scroll" id="miniCartScroll">
                 {this.props.cart === null ? (
                   <div></div>
-                ) : (
+                ) : this.props.cart.length !== 0 ? (
                   this.props.cart.map((product, i) => {
                     return (
                       <div
@@ -262,6 +264,8 @@ class NavBar extends Component {
                       </div>
                     );
                   })
+                ) : (
+                  <h2 className="titleNAMini">Cart is Empty</h2>
                 )}
               </div>
               <div className="priceFlex">

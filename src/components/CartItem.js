@@ -81,9 +81,17 @@ class CartItem extends Component {
                               className={
                                 this.state.pAttributes[i] === item.value
                                   ? "cartSingleAttSelectedSwatchSmall"
-                                  : "cartSingleAttSmall"
+                                  : "cartSingleAttSmallSwatch"
                               }
-                              style={{ backgroundColor: item.displayValue }}
+                              style={{
+                                backgroundColor: item.displayValue,
+                                borderColor:
+                                  this.state.pAttributes[i] === item.value
+                                    ? "#5ECE7B"
+                                    : item.displayValue === "White"
+                                    ? "black"
+                                    : item.displayValue,
+                              }}
                             ></div>
                           </div>
                         ) : (
@@ -106,9 +114,17 @@ class CartItem extends Component {
                               className={
                                 this.state.pAttributes[i] === item.value
                                   ? "cartSingleAttSelectedSwatch"
-                                  : "cartSingleAtt"
+                                  : "cartSingleAttSwatch"
                               }
-                              style={{ backgroundColor: item.displayValue }}
+                              style={{
+                                backgroundColor: item.displayValue,
+                                borderColor:
+                                  this.state.pAttributes[i] === item.value
+                                    ? "#5ECE7B"
+                                    : item.displayValue === "White"
+                                    ? "black"
+                                    : item.displayValue,
+                              }}
                             ></div>
                           </div>
                         ) : (
