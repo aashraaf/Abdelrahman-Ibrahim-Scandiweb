@@ -1,4 +1,4 @@
-import "../css/MainPage.css";
+import "../../css/MainPage.css";
 import React, { Component } from "react";
 import Card from "./Card";
 
@@ -33,7 +33,6 @@ class MainPage extends Component {
                   <Card
                     addToCartDefault={this.props.addToCartDefault}
                     currency={this.props.currency}
-                    setSingleProduct={this.props.setSingleProduct}
                     key={product.id}
                     p={product}
                   ></Card>

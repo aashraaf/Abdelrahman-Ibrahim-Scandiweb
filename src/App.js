@@ -1,10 +1,9 @@
 import "./App.css";
 import React, { Component } from "react";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import MainPage from "./components/MainPage";
-import ProductPage from "./components/ProductPage";
-import CartPage from "./components/CartPage";
-import NavBar from "./components/NavBar";
+import MainPage from "./components/Category/MainPage";
+import ProductPage from "./components/Product/ProductPage";
+import CartPage from "./components/Cart/CartPage";
+import NavBar from "./components/NavBar/NavBar";
 import "./css/NavBar.css";
 import {
   BrowserRouter,
@@ -14,14 +13,11 @@ import {
   Routes,
 } from "react-router-dom";
 import isEqual from "lodash/isEqual";
+import gqlFunctions from "./files/gqlQueries";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.client = new ApolloClient({
-      uri: "http://localhost:4000/",
-      cache: new InMemoryCache(),
-    });
 
     this.state = {
       category: null,
@@ -39,24 +35,16 @@ class App extends Component {
     this.addToCartAttributes = this.addToCartAttributes.bind(this);
     this.deleteCart = this.deleteCart.bind(this);
   }
-  componentDidMount() {
-    let q = `{
-        categories {
-          name
-        }
-      } 
-      `;
-    this.client
-      .query({
-        query: gql(q),
-      })
-      .then((result) => {
-        this.setState({
-          categories: result.data.categories,
-          category: result.data.categories[0].name,
-        });
-        this.getProducts(result.data.categories[0].name);
+  async componentDidMount() {
+    gqlFunctions.getCategories().then((result) => {
+      this.setState({
+        categories: result,
+        category: result[0].name,
       });
+      gqlFunctions.getProducts(result[0].name).then((result) => {
+        this.setState({ products: result });
+      });
+    });
 
     if (localStorage.getItem("cart") !== null) {
       const totalPrice = parseFloat(localStorage.getItem("totalPrice"));
@@ -178,7 +166,10 @@ class App extends Component {
   changeCategory(cat) {
     if (this.state.category !== cat) {
       this.setState({ category: cat });
-      this.getProducts(cat);
+
+      gqlFunctions.getProducts(cat).then((result) => {
+        this.setState({ products: result });
+      });
     }
   }
 
@@ -189,58 +180,14 @@ class App extends Component {
     }
   }
 
-  async getProducts(cat) {
-    let q =
-      `{
-        category(input:{title:"` +
-      cat +
-      `"}){
-          products{
-            id
-            name
-            brand
-            gallery
-            attributes {
-              id
-              name
-              type
-              items {
-                id
-                displayValue
-                value
-              }
-            }
-            inStock
-            prices{
-              currency{
-                symbol
-                label
-              }
-              amount
-            }
-          }
-        }
-      }`;
-    await this.client
-      .query({
-        query: gql(q),
-      })
-      .then((result) => {
-        this.setState({ products: result.data.category.products });
-      });
-  }
-
   render() {
     const MainPageWrapper = (props) => {
       const params = useParams();
       return (
         <MainPage
-          client={this.client}
           addToCartDefault={this.addToCartDefault}
           currency={this.state.currency}
-          category={this.state.category}
           products={this.state.products}
-          setSingleProduct={this.setSingleProduct}
           categories={this.state.categories}
           {...{ ...props, match: { params } }}
         />
@@ -251,12 +198,8 @@ class App extends Component {
       const params = useParams();
       return (
         <ProductPage
-          category={this.state.category}
-          client={this.client}
-          id={this.state.singleProductid}
           addToCartAttributes={this.addToCartAttributes}
           currency={this.state.currency}
-          changeCategory={this.changeCategory}
           {...{ ...props, match: { params } }}
         />
       );
@@ -266,13 +209,11 @@ class App extends Component {
       const params = useParams();
       return (
         <CartPage
-          category={this.state.category}
           totalAmount={this.state.totalAmount}
           totalPrice={this.state.totalPrice}
           categories={this.state.categories}
           changeCategory={this.changeCategory}
           deleteCart={this.deleteCart}
-          client={this.client}
           addToCartAttributes={this.addToCartAttributes}
           removeFromCart={this.removeFromCart}
           currency={this.state.currency}
@@ -287,7 +228,6 @@ class App extends Component {
         <div>
           <BrowserRouter>
             <NavBar
-              client={this.client}
               totalAmount={this.state.totalAmount}
               totalPrice={this.state.totalPrice}
               addToCartAttributes={this.addToCartAttributes}
