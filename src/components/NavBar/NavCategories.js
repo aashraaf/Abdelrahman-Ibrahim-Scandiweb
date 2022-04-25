@@ -15,6 +15,7 @@ class NavCategories extends Component {
                 onClick={() => {
                   this.props.changeCategory(cat.name);
                   window.scrollTo(0, 0);
+                  localStorage.setItem("pAid", null);
                 }}
                 className={({ isActive }) =>
                   cat.name === this.props.category

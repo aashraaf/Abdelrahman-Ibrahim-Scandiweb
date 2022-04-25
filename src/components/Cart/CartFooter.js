@@ -31,6 +31,7 @@ class CartFooter extends Component {
             onClick={() => {
               this.props.changeCategory(this.props.categories[0].name);
               window.scrollTo(0, 0);
+              localStorage.setItem("pAid", null);
             }}
             to={{ pathname: "/" + this.props.categories[0].name }}
           >

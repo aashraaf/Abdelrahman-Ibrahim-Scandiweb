@@ -11,6 +11,7 @@ class Card extends Component {
           to={{ pathname: "/product/" + this.props.p.id }}
           onClick={() => {
             window.scrollTo(0, 0);
+            localStorage.setItem("pAid", null);
           }}
         >
           <div>

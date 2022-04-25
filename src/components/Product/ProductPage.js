@@ -21,6 +21,9 @@ class ProductPage extends Component {
 
   changeImage(img) {
     this.setState({ image: img });
+    localStorage.setItem("pAid", JSON.stringify(this.props.match.params.id));
+    localStorage.setItem("img", JSON.stringify(img));
+    localStorage.setItem("pA", JSON.stringify(this.state.pAttributes));
   }
 
   changeAtt(v, i) {
@@ -28,24 +31,53 @@ class ProductPage extends Component {
     joined[i] = v;
 
     this.setState({ pAttributes: joined });
+    localStorage.setItem("pAid", JSON.stringify(this.props.match.params.id));
+    localStorage.setItem("pA", JSON.stringify(joined));
+    localStorage.setItem("img", JSON.stringify(this.state.image));
   }
 
   async getProduct(id) {
     gqlFunctions.getProduct(id).then((result) => {
       if (result !== null) {
-        result.attributes.map((att) => {
-          const joined = this.state.pAttributes.concat(att.items[0].value);
+        if (
+          JSON.parse(localStorage.getItem("pAid")) ===
+            this.props.match.params.id &&
+          localStorage.getItem("pA")
+        ) {
           if (this._isMounted) {
-            this.setState({ pAttributes: joined });
+            this.setState({
+              pAttributes: JSON.parse(localStorage.getItem("pA")),
+            });
           }
-          return true;
-        });
-        if (this._isMounted) {
-          this.setState({
-            product: result,
-            image: result.gallery[0],
-            valid: true,
+        } else {
+          result.attributes.map((att) => {
+            const joined = this.state.pAttributes.concat(att.items[0].value);
+            if (this._isMounted) {
+              this.setState({ pAttributes: joined });
+            }
+            return true;
           });
+        }
+        if (
+          JSON.parse(localStorage.getItem("pAid")) ===
+            this.props.match.params.id &&
+          localStorage.getItem("img")
+        ) {
+          if (this._isMounted) {
+            this.setState({
+              product: result,
+              image: JSON.parse(localStorage.getItem("img")),
+              valid: true,
+            });
+          }
+        } else {
+          if (this._isMounted) {
+            this.setState({
+              product: result,
+              image: result.gallery[0],
+              valid: true,
+            });
+          }
         }
       }
       this.setState({ loading: true });

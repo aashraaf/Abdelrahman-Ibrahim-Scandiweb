@@ -36,6 +36,7 @@ class App extends Component {
     this.deleteCart = this.deleteCart.bind(this);
   }
   async componentDidMount() {
+    localStorage.setItem("pAid", null);
     gqlFunctions.getCategories().then((result) => {
       this.setState({
         categories: result,

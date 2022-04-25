@@ -624,7 +624,19 @@
   transform: scale(1.05, 1.05);
 }
 
+.cartButtonD:hover {
+  transition: 0.3s;
+  cursor: pointer;
+  transform: scale(1.05, 1.05);
+}
+
 .cartButtonSmall:hover {
+  transition: 0.3s;
+  cursor: pointer;
+  transform: scale(1.05, 1.05);
+}
+
+.cartButtonSmallD:hover {
   transition: 0.3s;
   cursor: pointer;
   transform: scale(1.05, 1.05);
@@ -689,7 +701,7 @@
   background-color: #ffffff;
 }
 
-.cartFlexCPrice{
+.cartFlexCPrice {
   position: relative;
   width: fit-content;
   /* max-width: 100%; */
